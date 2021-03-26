@@ -1,12 +1,19 @@
 #!/bin/bash
 
+WHOAMI=`whoami`
 
-PATH=`pwd`
+if [ "$WHOAMI" != "root" ]; then
+  echo "Script must be run as root oder sudo-er"
+  exit
+fi
+
+PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd)"
+
 #catching error messages
 trap 'catch $? $LINENO' ERR
 
 catch() {
-  echo "Error occured in Line No. $2"
+  echo "Error occured in Line $2: For more information look in errors.txt file in log directory"
 }
 
 
