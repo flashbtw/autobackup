@@ -1,7 +1,9 @@
 #!/bin/bash
 
+PASSWORD=`cat /home/flashzboi/autobackup/pwd.password`
+
 read -s -p "Password: " MYPASSWORD
-if [ "$MYPASSWORD" == "123" ]
+if [ "$MYPASSWORD" == "$PASSWORD"  ]
 then
   printf "\nHallo :-)\n"
 else
