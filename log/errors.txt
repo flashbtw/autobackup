@@ -1,0 +1,2 @@
+/usr/bin/cat: /gibs/nich/: Datei oder Verzeichnis nicht gefunden
+/usr/bin/cat: /gibt/es/nicht/: Datei oder Verzeichnis nicht gefunden
