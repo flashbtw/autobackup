@@ -21,7 +21,7 @@ logecho()
 logprintf()
 (
     printf "$@"
-    printf "$@"
+    printf "$@" >>$LOG
 )
 
 #removing old logs
