@@ -3,11 +3,12 @@
 WHOAMI=`whoami`
 
 if [ "$WHOAMI" != "root" ]; then
-  echo "Script must be run as root oder sudo-er"
+  echo "Script must be run as root or sudo-er"
   exit
 fi
 
 PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd)"
+/usr/bin/rm $PATH/log/errors.txt
 
 #catching error messages
 trap 'catch $? $LINENO' ERR
@@ -17,7 +18,7 @@ catch() {
 }
 
 
-PASSWORD=`/usr/bin/cat /home/flashzboi/autobackup/pwd.password 2>$PATH/log/errors.txt`
+PASSWORD=`/usr/bin/cat /home/flashzboi/autobackup/pwd.password 2>>$PATH/log/errors.txt`
 
 #checking if password file is empty
 if [ "$PASSWORD" != "" ]
@@ -34,11 +35,12 @@ then
   printf "\nHallo :-)\n"
 else
   printf "\nNö.\n"
+  exit
 fi
 {
-/usr/bin/cat /gibs/nich/ 2>$PATH/log/errors.txt
+/usr/bin/cat /gibs/nich/
 } 2>>$PATH/log/errors.txt
 
 {
-/usr/bin/cat /gibt/es/nicht/
+/usr/bin/cat /does/not/exist/
 } 2>>$PATH/log/errors.txt
