@@ -66,7 +66,7 @@ then
   logprintf "No Abortion detected. Restoring the server...\n"
   } 2>>$ERRORLOG
 else
-  logprintf "\nAuthentication Failed."
+  logprintf "Authentication Failed.\n"
   exit
 fi
 
