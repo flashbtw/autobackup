@@ -9,11 +9,11 @@ if [ "$WHOAMI" != "root" ]; then
 fi
 
 #Path of Script
-PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd)"
+PFAD="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd)"
 #Path of Error-Log-File
-ERRORLOG="$PATH/log/errors.txt"
+ERRORLOG="$PFAD/log/errors.txt"
 #Path of Log-File
-LOG="$PATH/log/log.txt"
+LOG="$PFAD/log/log.txt"
 
 #custom commands for logging
 logecho()
@@ -39,7 +39,7 @@ catch() {
 }
 
 #Password Reading
-PASSWORD=`/usr/bin/cat /home/flashzboi/autobackup/pwd.password 2>>$PATH/log/errors.txt`
+PASSWORD=`/usr/bin/cat /home/flashzboi/autobackup/pwd.password 2>>$ERRORLOG`
 
 #checking if password file is empty
 if [ "$PASSWORD" != "" ]
