@@ -8,10 +8,12 @@ if [ "$WHOAMI" != "root" ]; then
   exit
 fi
 
+#Password Reading
+PASSWORD=`/usr/bin/cat /home/flashzboi/autobackup/pwd.password 2>>$ERROR_LOG`
 #Path of Script
 PFAD="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd)"
 #Path of Error-Log-File
-ERRORLOG="$PFAD/log/errors.txt"
+ERROR_LOG="$PFAD/log/errors.txt"
 #Path of Log-File
 LOG="$PFAD/log/log.txt"
 
@@ -29,7 +31,7 @@ logprintf()
 )
 
 #removing old logs
-/usr/bin/rm $ERRORLOG 2>>/dev/null
+/usr/bin/rm $ERROR_LOG 2>>/dev/null
 /usr/bin/rm $LOG 2>>/dev/null
 
 #catching error messages
@@ -37,9 +39,6 @@ trap 'catch $? $LINENO' ERR
 catch() {
   echo "Error occured in Line $2: For more information look in errors.txt file in log directory"
 }
-
-#Password Reading
-PASSWORD=`/usr/bin/cat /home/flashzboi/autobackup/pwd.password 2>>$ERRORLOG`
 
 #checking if password file is empty
 if [ "$PASSWORD" != "" ]
@@ -51,8 +50,8 @@ else
 fi
 
 #Prompting for Password and Checking
-read -s -p "Password: " MYPASSWORD
-if [ "$MYPASSWORD" == "$PASSWORD"  ]
+read -s -p "Password: " TYPED_PASSWORD
+if [ "$TYPED_PASSWORD" == "$PASSWORD"  ]
 then
   logprintf "\nServer restore will begin in a few sceonds. If you want to abort this action, press CTRL + C\n"
   {
@@ -64,7 +63,7 @@ then
   logprintf "1...\n"
   /usr/bin/sleep 1
   logprintf "No Abortion detected. Restoring the server...\n"
-  } 2>>$ERRORLOG
+  } 2>>$ERROR_LOG
 else
   logprintf "Authentication Failed.\n"
   exit
@@ -72,21 +71,21 @@ fi
 
 #checking if directorys already exist
 #creating the main home directory
-SERVERDIR="/home/mc"
-SERVERDIRTEST=`/usr/bin/ls $SERVERDIR`
+SERVER_DIR="/home/mc"
+SERVER_DIR_TEST=`/usr/bin/ls $SERVER_DIR`
 
 catch() {
   echo "Error occured in Line $2: For more information look in errors.txt file in log directory"
 }
 
-if [ "$SERVERDIRTEST" == "" ]; then
+if [ "$SERVER_DIR_TEST" == "" ]; then
   {
   /usr/bin/mkdir /home/mc/
   /usr/bin/touch /home/mc/initial.indicator
-  } 2>>$ERRORLOG
-  SERVERDIRTEST2=`/usr/bin/ls $SERVERDIR 2>>/dev/null`
+  } 2>>$ERROR_LOG
+  SERVER_DIR_TEST2=`/usr/bin/ls $SERVER_DIR 2>>/dev/null`
 
-  if [ "$SERVERDIRTEST2" == "" ]; then
+  if [ "$SERVER_DIR_TEST2" == "" ]; then
     logecho "Home Directory can not be created"
   else
     logecho "Home Directory successfully created"
