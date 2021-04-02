@@ -1,13 +1,14 @@
 #!/bin/bash
+source $CONFIG
+source $LOGECHO
+source $LOGPRINTF
 
-#This file is still in testing format! Some commands might seem to be unnecessary.
 DATE=`printf '%(%Y-%m-%d)T\n' -1`
 #change this to auto detected file location
-PATH_LOG_DIRECTORY="/home/flashzboi/autobackup/logtest"
 DATE_IN_FILE=`/usr/bin/cat $PATH_LOG_DIRECTORY/date.date`
-PATH_LOGNUMBER="$PATH_LOG_DIRECTORY/next.number"
-PATH_DATE="$PATH_LOG_DIRECTORY/date.date"
-/usr/bin/echo $PATH_LOG_DIRECTORY
+PATH_LOGNUMBER="$PFAD/next.number"
+PATH_DATE="$PFAD/date.date"
+/usr/bin/echo "Log Directory: $PATH_LOG_DIRECTORY"
 /usr/bin/echo $PATH_LOGNUMBER
 /usr/bin/echo $PATH_LOGNUMBER_IND
 /usr/bin/echo "Today is the $DATE"
@@ -35,9 +36,10 @@ if `/usr/bin/test -f $PATH_DATE` ; then
     fi
   else
     {
-    /usr/bin/tar cfvz $PATH_LOG_DIRECTORY/logs-$DATE_IN_FILE.tar.gz --exclude='*.tar.gz' --exclude='*.number' --exclude='*.date' -C /home/flashzboi/autobackup/logtest/ .
-    /usr/bin/rm $PATH_LOG_DIRECTORY/*.log
-    /usr/bin/rm $PATH_LOG_DIRECTORY/*.txt
+    /usr/bin/tar cfvz $LOG_LOCATION/logs-$DATE_IN_FILE.tar.gz --exclude='*.tar.gz' --exclude='*.number' --exclude='*.date' -C $LOG_LOCATION .
+    /usr/bin/rm $LOG_LOCATION/*.log
+    /usr/bin/tar cfvz $ERROR_LOG_LOCATION/errorlogs-$DATE_IN_FILE.tar.gz --exclude='*.tar.gz' -C $ERROR_LOG_LOCATION
+    /usr/bin/rm $ERROR_LOG_LOCATION/*.log
     } >>/dev/null
     {
     /usr/bin/echo $DATE
