@@ -1,5 +1,6 @@
 PFAD="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd)"
 PASSWORD=`/usr/bin/cat $PFAD/pwd.password`
+CUSTOM_CMD_PATH="$PFAD/custom"
 
 ### Date ###
 DATE_PATH="$PFAD/date.date"
