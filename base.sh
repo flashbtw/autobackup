@@ -1,9 +1,9 @@
 #!/bin/bash
 export CONFIG="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd)/config.sh"
-export LOGECHO="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd)/logecho.sh"
-export LOGPRINTF="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd)/logprintf.sh"
-export DATE_IN_FILE="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd)/date_in_file.sh"
 source $CONFIG
+export LOGECHO="$CUSTOM_CMD_PATH/logecho.sh"
+export LOGPRINTF="$CUSTOM_CMD_PATH/logprintf.sh"
+export DATE_IN_FILE="$CUSTOM_CMD_PATH/date_in_file.sh"
 source $LOGECHO
 source $LOGPRINTF
 source $DATE_IN_FILE
