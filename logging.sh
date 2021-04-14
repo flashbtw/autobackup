@@ -36,14 +36,17 @@ if `/usr/bin/test -f $PATH_DATE` ; then
     fi
   else
     {
-    /usr/bin/tar cfvz $LOG_LOCATION/logs-$DATE_IN_FILE.tar.gz --exclude='*.tar.gz' --exclude='*.number' --exclude='*.date' -C $LOG_LOCATION .
-    /usr/bin/rm $LOG_LOCATION/*.log
-    /usr/bin/tar cfvz $ERROR_LOG_LOCATION/errorlogs-$DATE_IN_FILE.tar.gz --exclude='*.tar.gz' -C $ERROR_LOG_LOCATION
-    /usr/bin/rm $ERROR_LOG_LOCATION/*.log
-    } >>/dev/null
+    /usr/bin/tar cfvz $LOG_DIRECTORY/logs-$DATE_IN_FILE.tar.gz --exclude='*.tar.gz' --exclude='*.number' --exclude='*.date' -C $LOG_DIRECTORY .
+    /usr/bin/rm $LOG_DIRECTORY/*.log
+    /usr/bin/tar cfvz $ERROR_LOG_DIRECTORY/errorlogs-$DATE_IN_FILE.tar.gz --exclude='*.tar.gz' -C $ERROR_LOG_DIRECTORY
+    /usr/bin/rm $ERROR_LOG_DIRECTORY/*.log
+    } 2>/dev/null >/dev/null
     {
     /usr/bin/echo $DATE
     } >$PATH_DATE
+    {
+    /usr/bin/echo "1"
+    } >$PATH_LOGNUMBER
   fi
 else
   /usr/bin/echo "Creating Date File"

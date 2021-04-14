@@ -15,14 +15,13 @@ ERROR_LOG_DIRECTORY="$PFAD/logs/errorlog"
 ERROR_LOG_NAME="error$LOG_NUMBER.log"
 ERROR_LOG_LOCATION="$PFAD/logs/errorlog/$ERROR_LOG_NAME"
 
-
 ##### FUNCTIONS #####
 
 ### Error Catch ###
 function errorcatcher {
   trap 'catch $? $LINENO' ERR
   catch() {
-    echo "Error occured in Line $2: For more information look in errors.txt file in log directory"
+    echo "Error occured in Line $2: For more information look in errors.log file in log directory"
   }
 }
 
